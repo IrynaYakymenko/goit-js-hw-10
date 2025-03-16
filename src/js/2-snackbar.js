@@ -1,4 +1,4 @@
-import iziToast from "iziToast";
+import iziToast from "izitoast";
 
 const refs = {
     form: document.querySelector('.form'),

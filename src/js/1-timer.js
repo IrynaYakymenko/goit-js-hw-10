@@ -1,6 +1,6 @@
 
 import flatpickr from "flatpickr";
-import iziToast from "iziToast";
+import iziToast from "izitoast";
 
 const refs = {
     startBtn: document.querySelector(".btn"),
