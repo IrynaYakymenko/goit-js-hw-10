@@ -1,9 +1,12 @@
 
 import flatpickr from "flatpickr";
 import iziToast from "izitoast";
+import 'flatpickr/dist/flatpickr.min.css';
 
 const refs = {
     startBtn: document.querySelector(".btn"),
+    inputField: document.querySelector('#datetime-picker'),
+    
     days: document.querySelector('[data-days]'),
     hours: document.querySelector('[data-hours]'),
     minutes: document.querySelector('[data-minutes]'),
@@ -11,7 +14,6 @@ const refs = {
 }
 
 let userSelectedDate;
-
 
 const options = {
     enableTime: true,
@@ -29,10 +31,15 @@ const options = {
                 position: 'topRight'
             });
             refs.startBtn.disabled = true;
-        }else {refs.startBtn.disabled = false;}
+        }else {
+            refs.startBtn.disabled = false;
+            refs.inputField.disabled = true;
+        }
         
     },
   };
+
+  flatpickr("#datetime-picker", options);
 
 const onStart = event => {
     if (!userSelectedDate) {
@@ -41,14 +48,20 @@ const onStart = event => {
             message: 'Please select a date first!',
             position: 'topRight'
         });
+        refs.startBtn.disabled = false;
+        refs.inputField.disabled = false;
         return;
     }
+    
+        refs.startBtn.disabled = true;
+        refs.inputField.disabled = true;
     const timerId = setInterval(() => {
         const diff = userSelectedDate - Date.now();
-        refs.startBtn.disabled = true;
+        
         if (diff<=0){
             clearInterval(timerId);
             refs.startBtn.disabled = false;
+            refs.inputField.disabled = false;
             return;
         }
         const {days, hours, minutes, seconds} = convertMs(diff);
@@ -85,4 +98,3 @@ const onStart = event => {
 
 refs.startBtn.addEventListener('click', onStart);
 
-flatpickr("#datetime-picker", options);
