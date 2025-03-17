@@ -48,15 +48,14 @@ const onStart = event => {
             position: 'topRight'
         });
         refs.startBtn.disabled = false;
-        refs.inputField.disabled = false;
         return;
     }
 
-        refs.startBtn.disabled = true;
-        refs.inputField.disabled = true;
+        
     const timerId = setInterval(() => {
         const diff = userSelectedDate - Date.now();
-        
+        refs.startBtn.disabled = true;
+        refs.inputField.disabled = true;
         if (diff<=0){
             clearInterval(timerId);
             refs.startBtn.disabled = false;
