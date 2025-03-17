@@ -1,4 +1,5 @@
 import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 const refs = {
     form: document.querySelector('.form'),
@@ -36,7 +37,7 @@ const handleSubmit = event => {
         });
     })
     .catch(delayNow => {
-        iziToast.success({
+        iziToast.error({
             title: 'Success',
             message: `❌ Rejected promise in ${delayNow}ms`,
             position: 'topRight'

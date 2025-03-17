@@ -2,6 +2,7 @@
 import flatpickr from "flatpickr";
 import iziToast from "izitoast";
 import 'flatpickr/dist/flatpickr.min.css';
+import "izitoast/dist/css/iziToast.min.css";
 
 const refs = {
     startBtn: document.querySelector(".btn"),
@@ -15,12 +16,24 @@ const refs = {
 
 let userSelectedDate;
 
+refs.startBtn.disabled = true;
+
 const options = {
     enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
+        if (!selectedDates.length || isNaN(selectedDates[0].getTime())) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Invalid date selected!',
+                position: 'topRight'
+            });
+            refs.startBtn.disabled = true;
+            return;
+        }
+
         userSelectedDate = selectedDates[0];
         let dateNow = new Date();
 
