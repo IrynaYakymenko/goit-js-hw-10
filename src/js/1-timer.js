@@ -33,7 +33,6 @@ const options = {
             refs.startBtn.disabled = true;
         }else {
             refs.startBtn.disabled = false;
-            refs.inputField.disabled = true;
         }
         
     },
@@ -52,7 +51,7 @@ const onStart = event => {
         refs.inputField.disabled = false;
         return;
     }
-    
+
         refs.startBtn.disabled = true;
         refs.inputField.disabled = true;
     const timerId = setInterval(() => {
